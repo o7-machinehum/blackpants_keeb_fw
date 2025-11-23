@@ -1,5 +1,17 @@
 # Quantum Mechanical Keyboard Firmware
 
+``` bash
+openocd \
+  -f interface/stlink.cfg \
+  -f target/stm32f0x.cfg \
+  -c "adapter speed 100; reset_config srst_only connect_assert_srst; \
+      program .build/solderparty_keebdeck_basic_default.elf verify reset exit"
+
+dfu-util -a 0 -d 0483:DF11 -s 0x8000000:leave -D <filename>
+
+make solderparty/keebdeck_basic:default
+```
+
 [![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
 [![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/qmk)
 [![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
